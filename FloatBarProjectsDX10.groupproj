@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{357C595A-BF75-44E8-B8FB-F82CFE5DEDDE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Package\FloatBarComponents.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FloatBarTest.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FloatBarComponents">
+        <MSBuild Projects="Package\FloatBarComponents.dproj"/>
+    </Target>
+    <Target Name="FloatBarComponents:Clean">
+        <MSBuild Projects="Package\FloatBarComponents.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FloatBarComponents:Make">
+        <MSBuild Projects="Package\FloatBarComponents.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FloatBarTest">
+        <MSBuild Projects="FloatBarTest.dproj"/>
+    </Target>
+    <Target Name="FloatBarTest:Clean">
+        <MSBuild Projects="FloatBarTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FloatBarTest:Make">
+        <MSBuild Projects="FloatBarTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FloatBarComponents;FloatBarTest"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FloatBarComponents:Clean;FloatBarTest:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FloatBarComponents:Make;FloatBarTest:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
